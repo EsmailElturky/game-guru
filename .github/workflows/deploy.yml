@@ -1,9 +1,9 @@
-name: Deploy Angular to GitHub Pages
+name: Deploy Game-Gure to GitHub Pages
 
 on:
   push:
     branches:
-      - master
+      - dev
 
 permissions:
   contents: write
@@ -13,27 +13,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Setup .npmrc for GitHub Packages
-        run: |
-          echo "@EsmailElturky:registry=https://npm.pkg.github.com/" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+          registry-url: https://npm.pkg.github.com
+          scope: '@EsmailElturky'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.UI_KIT_NPM_TOKEN }}
 
-      - name: Build Angular
-        run: npm run build -- --base-href="/your-repo-name/"
+      - name: Build Angular app
+        run: npm run build -- --base-href="/Game-Gure/"
 
-      - name: Deploy
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/your-project-name
+          github_token: ${{ secrets.UI_KIT_NPM_TOKEN }}
+          publish_dir: ./dist/Game-Gure/browser
