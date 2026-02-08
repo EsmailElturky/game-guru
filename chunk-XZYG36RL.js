@@ -1,0 +1,1 @@
+import{Hb as o,Qa as i,kb as s,lb as n}from"./chunk-EIVL4LAA.js";var a=class t{static \u0275fac=function(e){return new(e||t)};static \u0275cmp=i({type:t,selectors:[["app-cities"]],decls:2,vars:0,template:function(e,p){e&1&&(s(0,"p"),o(1,"cities works!"),n())},encapsulation:2})};export{a as Cities};

@@ -1,0 +1,1 @@
+import{Hb as p,Qa as s,kb as o,lb as n}from"./chunk-EIVL4LAA.js";var r=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=s({type:e,selectors:[["app-sports"]],decls:2,vars:0,template:function(t,i){t&1&&(o(0,"p"),p(1,"sports works!"),n())},encapsulation:2})};export{r as Sports};
