@@ -1,0 +1,578 @@
+<div class="demo-container">
+  <!-- Toast Component -->
+  <uikit-toast></uikit-toast>
+
+  <p-tabs value="0">
+    <p-tablist>
+      <p-tab value="0">Reactive Form</p-tab>
+      <p-tab value="1">toggle switch</p-tab>
+      <p-tab value="2">color picker</p-tab>
+      <p-tab value="3">input text</p-tab>
+      <p-tab value="4">text area</p-tab>
+      <p-tab value="5">input password</p-tab>
+      <p-tab value="6">input number</p-tab>
+      <p-tab value="7">checkbox</p-tab>
+      <p-tab value="8">file input - image gallery</p-tab>
+      <p-tab value="9">file input - document upload</p-tab>
+      <p-tab value="10">file input - multi file</p-tab>
+      <p-tab value="11">file input - basic</p-tab>
+      <p-tab value="12">file input - auto upload</p-tab>
+      <p-tab value="13">toast demo</p-tab>
+      <p-tab value="14">leaflet demo</p-tab>
+      <p-tab value="15">button demo</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+      <p-tabpanel value="0">
+        <div class="demo-container">
+          <h2>Form Demo</h2>
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" class="demo-form">
+            <div class="form-section">
+              <h3>Reactive Form</h3>
+
+              <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <uiKit-input-text
+                  formControlName="fullName"
+                  [placeholder]="'Full Name'"
+                ></uiKit-input-text>
+              </div>
+
+              <div class="form-group">
+                <label for="textArea">Text Area</label>
+                <uikit-text-area
+                  formControlName="textArea"
+                  [placeholder]="'Text Area'"
+                ></uikit-text-area>
+              </div>
+
+              <div class="form-group">
+                <label for="inputNumber">Input Number</label>
+                <uikit-input-number
+                  formControlName="inputNumber"
+                  [placeholder]="'Input Number'"
+                ></uikit-input-number>
+              </div>
+
+              <div class="form-group">
+                <label for="inputPassword">Input Password</label>
+                <uikit-input-password
+                  formControlName="inputPassword"
+                  [placeholder]="'Input Password'"
+                ></uikit-input-password>
+              </div>
+
+              <div class="form-group">
+                <label>Color Picker</label>
+                <uiKit-color-picker
+                  formControlName="colorPicker"
+                ></uiKit-color-picker>
+              </div>
+
+              <div class="form-group">
+                <label>Checkbox</label>
+                <uikit-checkbox
+                  formControlName="checkbox"
+                  [single]="false"
+                  [horizontal]="true"
+                  [options]="checkboxOptions1"
+                ></uikit-checkbox>
+              </div>
+
+              <div class="form-group">
+                @for (option of checkboxOptions2; track $index) {
+                <label>{{ option.label }}</label>
+                <uikit-checkbox
+                  formControlName="checkbox2"
+                  [binary]="false"
+                  [optionValue]="option.value"
+                  [value]="form.value.checkbox2"
+                ></uikit-checkbox>
+                }
+              </div>
+
+              <div class="form-group">
+                <label>Toggle Switch (must be on)</label>
+                <uiKit-toggle-switch
+                  formControlName="toggleSwitch"
+                ></uiKit-toggle-switch>
+              </div>
+              <div class="form-value">
+                <h3>Form Value</h3>
+                <pre>{{ form.value | json }}</pre>
+              </div>
+              <div class="form-actions">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="onReset()"
+                >
+                  Reset
+                </button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="form-section">
+            <h3>Demo Components</h3>
+          </div>
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="1">
+        <div class="demo-container">
+          <p class="m-0">default on</p>
+          <uiKit-toggle-switch [value]="true"></uiKit-toggle-switch>
+          <p class="m-0">default off</p>
+          <uiKit-toggle-switch [value]="false"></uiKit-toggle-switch>
+
+          <p class="m-0">disabled on</p>
+          <uiKit-toggle-switch
+            [value]="true"
+            [disabled]="true"
+          ></uiKit-toggle-switch>
+
+          <p class="m-0">disabled off</p>
+          <uiKit-toggle-switch
+            [value]="false"
+            [disabled]="true"
+          ></uiKit-toggle-switch>
+
+          <p class="m-0">readonly on</p>
+          <uiKit-toggle-switch
+            [value]="true"
+            [readonly]="true"
+          ></uiKit-toggle-switch>
+
+          <p class="m-0">readonly off</p>
+          <uiKit-toggle-switch
+            [value]="false"
+            [readonly]="true"
+          ></uiKit-toggle-switch>
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="2">
+        <div class="demo-container">
+          <p class="m-0">default</p>
+          <uiKit-color-picker></uiKit-color-picker>
+
+          <p class="m-0">disabled</p>
+          <uiKit-color-picker [disabled]="true"></uiKit-color-picker>
+
+          <p class="m-0">viewHexText</p>
+          <uiKit-color-picker
+            [viewHexText]="true"
+            [value]="'#000000'"
+          ></uiKit-color-picker>
+
+          <p class="m-0">disabled viewHexText</p>
+          <uiKit-color-picker
+            [disabled]="true"
+            [viewHexText]="true"
+          ></uiKit-color-picker>
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="3">
+        <div class="demo-container">
+          <p class="m-0">default</p>
+          <div>
+            <uiKit-input-text [placeholder]="'Input Text'"></uiKit-input-text>
+          </div>
+
+          <p class="m-0">disabled</p>
+          <div>
+            <uiKit-input-text [disabled]="true"></uiKit-input-text>
+          </div>
+
+          <p class="m-0">maxLength</p>
+          <div>
+            <uiKit-input-text [maxLength]="10"></uiKit-input-text>
+          </div>
+
+          <p class="m-0">allowSpellCheck</p>
+          <div>
+            <uiKit-input-text [allowSpellCheck]="false"></uiKit-input-text>
+          </div>
+
+          <p class="m-0">allowPaste</p>
+          <uiKit-input-text [allowPaste]="true"></uiKit-input-text>
+
+          <p class="m-0">
+            inline <uiKit-input-text [inline]="true"></uiKit-input-text> input
+          </p>
+
+          <p class="m-0">withoutBorder</p>
+          <div>
+            <uiKit-input-text [withoutBorder]="true"></uiKit-input-text>
+          </div>
+
+          <p class="m-0">textCase LowerCase</p>
+          <div>
+            <uiKit-input-text
+              [textCase]="TextCaseEnum.LowerCase"
+            ></uiKit-input-text>
+          </div>
+
+          <p class="m-0">textCase UpperCase</p>
+          <div>
+            <uiKit-input-text
+              [textCase]="TextCaseEnum.UpperCase"
+            ></uiKit-input-text>
+          </div>
+
+          <p class="m-0">textCase Mixed</p>
+          <div>
+            <uiKit-input-text
+              [textCase]="TextCaseEnum.Mixed"
+            ></uiKit-input-text>
+          </div>
+
+          <p class="m-0">style</p>
+          <div>
+            <uiKit-input-text
+              [style]="{ color: 'red', fontSize: '16px', fontWeight: 400 }"
+            ></uiKit-input-text>
+          </div>
+
+          <p class="m-0">isSearchable</p>
+          <div>
+            <uiKit-input-text [isSearchable]="true"></uiKit-input-text>
+          </div>
+
+          <p class="m-0">hasError</p>
+          <div>
+            <uiKit-input-text [hasError]="true"></uiKit-input-text>
+          </div>
+        </div>
+      </p-tabpanel>
+      <p-tabpanel value="4">
+        <p class="m-0">default</p>
+        <uikit-text-area></uikit-text-area>
+
+        <p class="m-0">disabled</p>
+        <uikit-text-area
+          [disabled]="true"
+          [value]="'disabled'"
+        ></uikit-text-area>
+
+        <p class="m-0">autocomplete</p>
+        <uikit-text-area [autocomplete]="true"></uikit-text-area>
+
+        <p class="m-0">textCase LowerCase</p>
+        <uikit-text-area [textCase]="TextCaseEnum.LowerCase"></uikit-text-area>
+
+        <p class="m-0">textCase UpperCase</p>
+        <uikit-text-area [textCase]="TextCaseEnum.UpperCase"></uikit-text-area>
+
+        <p class="m-0">textCase Mixed</p>
+        <uikit-text-area [textCase]="TextCaseEnum.Mixed"></uikit-text-area>
+
+        <p class="m-0">maxLength 10</p>
+        <uikit-text-area [maxLength]="10"></uikit-text-area>
+
+        <p class="m-0">allowSpellCheck</p>
+        <uikit-text-area [allowSpellCheck]="true"></uikit-text-area>
+
+        <p class="m-0">disable allowPaste</p>
+        <uikit-text-area [allowPaste]="false"></uikit-text-area>
+
+        <p class="m-0">readonly</p>
+        <uikit-text-area
+          [readonly]="true"
+          [value]="'readonly'"
+        ></uikit-text-area>
+
+        <p class="m-0">hasError</p>
+        <uikit-text-area [hasError]="true"></uikit-text-area>
+
+        <p class="m-0">rows</p>
+        <uikit-text-area [rows]="10"></uikit-text-area>
+
+        <p class="m-0">style</p>
+        <uikit-text-area
+          [style]="{ color: 'red', fontSize: '28px', fontWeight: 700 }"
+        ></uikit-text-area>
+      </p-tabpanel>
+      <p-tabpanel value="5">
+        <p class="m-0">default</p>
+        <uikit-input-password></uikit-input-password>
+
+        <p class="m-0">disabled</p>
+        <uikit-input-password [disabled]="true"></uikit-input-password>
+
+        <p class="m-0">showClear</p>
+        <uikit-input-password [showClear]="true"></uikit-input-password>
+
+        <p class="m-0">hasError</p>
+        <uikit-input-password [hasError]="true"></uikit-input-password>
+
+        <p class="m-0">feedback</p>
+        <uikit-input-password [feedback]="true"></uikit-input-password>
+
+        <p class="m-0">toggleMask</p>
+        <uikit-input-password [toggleMask]="false"></uikit-input-password>
+      </p-tabpanel>
+      <p-tabpanel value="6">
+        <p class="m-0">default</p>
+        <uikit-input-number></uikit-input-number>
+
+        <p class="m-0">disabled</p>
+        <uikit-input-number
+          [disabled]="true"
+          [value]="3333"
+        ></uikit-input-number>
+
+        <p class="m-0">readonly</p>
+        <uikit-input-number
+          [readonly]="true"
+          [value]="234234.342"
+        ></uikit-input-number>
+
+        <p class="m-0">showClear</p>
+        <uikit-input-number [showClear]="true"></uikit-input-number>
+
+        <p class="m-0">hasError</p>
+        <uikit-input-number [hasError]="true"></uikit-input-number>
+
+        <p class="m-0">minFractionDigits</p>
+        <uikit-input-number [minFractionDigits]="2"></uikit-input-number>
+
+        <p class="m-0">maxFractionDigits</p>
+        <uikit-input-number [maxFractionDigits]="2"></uikit-input-number>
+
+        <p class="m-0">useGrouping</p>
+        <uikit-input-number [useGrouping]="true"></uikit-input-number>
+
+        <p class="m-0">step 2</p>
+        <uikit-input-number [step]="2"></uikit-input-number>
+
+        <p class="m-0">min 1 and max 10</p>
+        <uikit-input-number [min]="1" [max]="10"></uikit-input-number>
+
+        <p class="m-0">maxlength 10</p>
+        <uikit-input-number [maxlength]="10"></uikit-input-number>
+
+        <p class="m-0">prefix</p>
+        <uikit-input-number [prefix]="'%'"></uikit-input-number>
+
+        <p class="m-0">suffix</p>
+        <uikit-input-number [suffix]="'%'"></uikit-input-number>
+
+        <p class="m-0">currency</p>
+        <uikit-input-number [currency]="CurrencyCode.EUR"></uikit-input-number>
+
+        <p class="m-0">hide buttons</p>
+        <uikit-input-number [showButtons]="false"></uikit-input-number>
+      </p-tabpanel>
+      <p-tabpanel value="7">
+        <p class="m-0">default</p>
+        <uikit-checkbox [value]="checkboxValue"></uikit-checkbox>
+
+        <p class="m-0">disabled true</p>
+        <uikit-checkbox [disabled]="true" [value]="true"></uikit-checkbox>
+
+        <p class="m-0">readonly true</p>
+        <uikit-checkbox [readonly]="true" [value]="true"></uikit-checkbox>
+
+        <p class="m-0">hasError</p>
+        <uikit-checkbox [hasError]="true"></uikit-checkbox>
+
+        <p class="m-0">binary</p>
+        <uikit-checkbox [binary]="true"></uikit-checkbox>
+
+        <p class="m-0">indeterminate</p>
+        <uikit-checkbox [indeterminate]="true"></uikit-checkbox>
+
+        <p class="m-0">style</p>
+        <uikit-checkbox
+          [style]="{ borderColor: 'red', fontSize: '16px', fontWeight: 400 }"
+        ></uikit-checkbox>
+      </p-tabpanel>
+      <!-- File Input - Image Gallery -->
+      <p-tabpanel value="8">
+        <div class="demo-container">
+          <h2>File Input - Image Gallery</h2>
+          <p>
+            Upload multiple images with dimension validation (min 800x600px)
+          </p>
+          <uikit-file-input
+            [multiple]="true"
+            [showPreview]="true"
+            [showFileList]="true"
+            [dragDropEnabled]="true"
+            [validation]="imageValidation"
+            placeholder="Drag images here or click to browse"
+            (filesSelected)="onFilesSelected($event, 'Image Gallery')"
+            (filesRemoved)="onFilesRemoved($event, 'Image Gallery')"
+            (errorOccurred)="onFileError($event, 'Image Gallery')"
+          ></uikit-file-input>
+        </div>
+      </p-tabpanel>
+
+      <!-- File Input - Document Upload -->
+      <p-tabpanel value="9">
+        <div class="demo-container">
+          <h2>File Input - Document Upload</h2>
+          <p>Upload a single PDF or Word document (max 10MB)</p>
+          <uikit-file-input
+            [multiple]="false"
+            [showPreview]="true"
+            [showFileList]="true"
+            [validation]="documentValidation"
+            placeholder="Choose a document file"
+            (filesSelected)="onFilesSelected($event, 'Document Upload')"
+            (filesRemoved)="onFilesRemoved($event, 'Document Upload')"
+            (errorOccurred)="onFileError($event, 'Document Upload')"
+          ></uikit-file-input>
+        </div>
+      </p-tabpanel>
+
+      <!-- File Input - Multi File -->
+      <p-tabpanel value="10">
+        <div class="demo-container">
+          <h2>File Input - Multiple Files</h2>
+          <p>Upload up to 10 files (images or PDFs, max 5MB each)</p>
+          <uikit-file-input
+            [multiple]="true"
+            [showPreview]="true"
+            [showFileList]="true"
+            [dragDropEnabled]="true"
+            [validation]="multiFileValidation"
+            placeholder="Drag files here or click to browse"
+            (filesSelected)="onFilesSelected($event, 'Multi File')"
+            (filesRemoved)="onFilesRemoved($event, 'Multi File')"
+            (errorOccurred)="onFileError($event, 'Multi File')"
+          ></uikit-file-input>
+        </div>
+      </p-tabpanel>
+
+      <!-- File Input - Basic -->
+      <p-tabpanel value="11">
+        <div class="demo-container">
+          <h2>File Input - Basic</h2>
+          <p>Basic file input with no validation</p>
+          <uikit-file-input
+            [multiple]="true"
+            [showPreview]="true"
+            [showFileList]="true"
+            [dragDropEnabled]="true"
+            placeholder="Drag files here or click to browse"
+            (filesSelected)="onFilesSelected($event, 'Basic')"
+            (filesRemoved)="onFilesRemoved($event, 'Basic')"
+            (errorOccurred)="onFileError($event, 'Basic')"
+          ></uikit-file-input>
+        </div>
+      </p-tabpanel>
+
+      <!-- File Input - Auto Upload -->
+      <p-tabpanel value="12">
+        <div class="demo-container">
+          <h2>File Input - Auto Upload</h2>
+          <p>Upload files automatically when selected</p>
+          <uikit-file-input
+            [multiple]="true"
+            [showPreview]="true"
+            [showFileList]="true"
+            [dragDropEnabled]="true"
+            [autoUpload]="false"
+            [uploadUrl]="'https://httpbin.org/post'"
+            placeholder="Drag files here or click to browse"
+            (filesSelected)="onFilesSelected($event, 'Auto Upload')"
+            (filesRemoved)="onFilesRemoved($event, 'Auto Upload')"
+            (errorOccurred)="onFileError($event, 'Auto Upload')"
+          ></uikit-file-input>
+        </div>
+      </p-tabpanel>
+
+      <!-- Toast Demo -->
+      <p-tabpanel value="13">
+        <div class="demo-container">
+          <h2>Toast Notifications Demo</h2>
+          <p>Click the buttons below to see different toast notifications</p>
+
+          <div class="demo-buttons-grid">
+            <!-- Success Toast -->
+            <div class="demo-button-group">
+              <h3>Success Toast</h3>
+              <p-button
+                label="Show Success"
+                severity="success"
+                (click)="showSuccessToast()"
+              />
+            </div>
+
+            <!-- Error Toast -->
+            <div class="demo-button-group">
+              <h3>Error Toast</h3>
+              <p-button
+                label="Show Error"
+                severity="danger"
+                (click)="showErrorToast()"
+              />
+            </div>
+
+            <!-- Info Toast -->
+            <div class="demo-button-group">
+              <h3>Info Toast</h3>
+              <p-button
+                label="Show Info"
+                severity="info"
+                (click)="showInfoToast()"
+              />
+            </div>
+
+            <!-- Warning Toast -->
+            <div class="demo-button-group">
+              <h3>Warning Toast</h3>
+              <p-button
+                label="Show Warning"
+                severity="warn"
+                (click)="showWarningToast()"
+              />
+            </div>
+
+            <!-- Toast with Action Button -->
+            <div class="demo-button-group">
+              <h3>Toast with Action</h3>
+              <p-button
+                label="Show with Action"
+                severity="success"
+                (click)="showToastWithAction()"
+              />
+            </div>
+
+            <!-- Sticky Toast -->
+            <div class="demo-button-group">
+              <h3>Sticky Toast</h3>
+              <p-button
+                label="Show Sticky"
+                severity="warn"
+                (click)="showStickyToast()"
+              />
+            </div>
+
+            <!-- Clear All -->
+            <div class="demo-button-group">
+              <h3>Clear All</h3>
+              <p-button
+                label="Clear All Toasts"
+                severity="secondary"
+                (click)="clearAllToasts()"
+              />
+            </div>
+          </div>
+        </div>
+      </p-tabpanel>
+
+      <p-tabpanel value="15">
+        <div class="demo-container">
+          <uikit-button
+            [icon]="'pi pi-user'"
+            iconPosition="left"
+          ></uikit-button>
+        </div>
+      </p-tabpanel>
+
+    </p-tabpanels>
+  </p-tabs>
+</div>

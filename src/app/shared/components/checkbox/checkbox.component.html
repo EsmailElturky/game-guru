@@ -1,0 +1,33 @@
+@if (single()) {
+<p-checkbox
+  [(ngModel)]="value"
+  [value]="optionValue()"
+  [binary]="binary()"
+  [inputId]="inputId()"
+  [invalid]="(control?.errors && control?.touched) || hasError()"
+  [readonly]="readonly()"
+  [disabled]="disabled()"
+  [indeterminate]="indeterminate()"
+  (onChange)="onValueChanged()"
+/>
+} @else {
+<div class="d-flex {{ !horizontal() ? 'flex-column' : '' }}">
+  @for (option of options(); track $index) {
+  <div class="checkbox-label-wrapper">
+    <p-checkbox
+      [(ngModel)]="value"
+      [value]="option.value"
+      [inputId]="inputId() + '-' + $index"
+      [invalid]="(control?.errors && control?.touched) || hasError()"
+      [readonly]="readonly()"
+      [disabled]="disabled()"
+      [indeterminate]="indeterminate()"
+      (onChange)="onValueChanged()"
+    />
+    <label for="{{ option.value }}">{{ option.label }}</label>
+  </div>
+  }
+</div>
+@if (control?.errors && control?.touched) {
+<uiKit-controls-error [error]="control?.errors"></uiKit-controls-error>
+} }

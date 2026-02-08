@@ -1,0 +1,17 @@
+<p-toggleSwitch
+  class="uikit-toggle-switch"
+  [ngClass]="{
+    'disabled': disabled(),
+    'readonly': readonly(),
+  }"
+  [tabindex]=""
+  [(ngModel)]="value"
+  [readonly]="readonly()"
+  [inputId]="inputId()"
+  [disabled]="disabled()"
+  (onChange)="onToggleSwitchChange()"
+/>
+
+@if (control?.errors && control?.touched) {
+  <uiKit-controls-error [error]="control?.errors"></uiKit-controls-error>
+}

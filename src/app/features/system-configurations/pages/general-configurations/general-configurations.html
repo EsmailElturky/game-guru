@@ -1,0 +1,113 @@
+<div class="px-5! py-8! min-h-full flex flex-col">
+  <div class="text-[clamp(24px,5vw,32px)]! font-bold! py-6! text-gray-900">
+    <p>{{ 'navigation.generalConfigurations' | translate }}</p>
+  </div>
+  <form [formGroup]="configForm" (ngSubmit)="save()" class="flex flex-col gap-10">
+    <!-- Points Section -->
+    <div class="flex flex-col gap-6">
+      <h2 class="text-xl font-bold text-(--primary-500)">
+        {{ 'generalConfigurations.points' | translate }}
+      </h2>
+      <hr class="border-gray-200" />
+      <div class="flex flex-col gap-2">
+        <label class="font-bold text-sm text-gray-700">
+          {{ 'generalConfigurations.onePointEqual' | translate }}
+        </label>
+        <div class="flex items-center gap-4">
+          <uiKit-input-text formControlName="pointValue" class="w-full max-w-sm"></uiKit-input-text>
+          <span class="font-bold text-lg text-gray-700">
+            {{ 'generalConfigurations.sr' | translate }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Refund Section -->
+    <div class="flex flex-col gap-6">
+      <h2 class="text-xl font-bold text-(--primary-500)">
+        {{ 'generalConfigurations.refund' | translate }}
+      </h2>
+      <hr class="border-gray-200" />
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">
+            {{ 'generalConfigurations.moreThan3Days' | translate }}
+          </label>
+          <uiKit-input-text formControlName="refundMoreThan3Days"></uiKit-input-text>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">
+            {{ 'generalConfigurations.from3To1Day' | translate }}
+          </label>
+          <uiKit-input-text formControlName="refund3To1Day"></uiKit-input-text>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">
+            {{ 'generalConfigurations.sameDay' | translate }}
+          </label>
+          <uiKit-input-text formControlName="refundSameDay"></uiKit-input-text>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">
+            {{ 'generalConfigurations.before1Hour' | translate }}
+          </label>
+          <uiKit-input-text formControlName="refundBefore1Hour"></uiKit-input-text>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscription Section -->
+    <div class="flex flex-col gap-6">
+      <h2 class="text-xl font-bold text-(--primary-500)">
+        {{ 'generalConfigurations.subscription' | translate }}
+      </h2>
+      <hr class="border-gray-200" />
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">
+            {{ 'generalConfigurations.fixedMonthly' | translate }}
+          </label>
+          <uiKit-input-text formControlName="fixedMonthly"></uiKit-input-text>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">
+            {{ 'generalConfigurations.fixedYearly' | translate }}
+          </label>
+          <uiKit-input-text formControlName="fixedYearly"></uiKit-input-text>
+        </div>
+        <div class="grid grid-cols-2 gap-10">
+          <div class="flex flex-col gap-2">
+            <label class="font-bold text-sm text-gray-700">
+              {{ 'generalConfigurations.fixedMonthlyAndPercentage' | translate }}
+            </label>
+            <uiKit-input-text formControlName="fixedMonthlyAndPercentageAmount"></uiKit-input-text>
+          </div>
+          <div class="flex flex-col gap-2 self-end">
+            <uiKit-input-text formControlName="fixedMonthlyAndPercentagePercent"></uiKit-input-text>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-10">
+          <div class="flex flex-col gap-2">
+            <label class="font-bold text-sm text-gray-700">
+              {{ 'generalConfigurations.fixedYearlyAndPercentage' | translate }}
+            </label>
+            <uiKit-input-text formControlName="fixedYearlyAndPercentageAmount"></uiKit-input-text>
+          </div>
+          <div class="flex flex-col gap-2 self-end">
+            <uiKit-input-text formControlName="fixedYearlyAndPercentagePercent"></uiKit-input-text>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Button -->
+    <div class="flex justify-end pt-4 border-t border-gray-100">
+      <uikit-button
+        type="submit"
+        [label]="'common.save' | translate"
+        [disabled]="configForm.invalid"
+        [style]="{ width: '120px', height: '40px', borderRadius: '12px', fontSize: '16px' }"
+      ></uikit-button>
+    </div>
+  </form>
+</div>

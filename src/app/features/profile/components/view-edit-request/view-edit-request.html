@@ -1,0 +1,105 @@
+<div class="flex flex-col gap-6">
+  <h2 class="text-xl font-bold text-gray-700">{{ 'profile.request' | translate }}</h2>
+  <hr class="border-gray-200" />
+
+  <form [formGroup]="requestForm" (ngSubmit)="save()" class="flex flex-col gap-8">
+    <!-- Top Grid: Subject, Org, Date, Phone, Name, Email -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="flex flex-col gap-2">
+        <label class="font-bold text-sm text-gray-700">{{ 'profile.subject' | translate }}</label>
+        <uiKit-input-text formControlName="subject"></uiKit-input-text>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="font-bold text-sm text-gray-700">{{
+          'profile.organizationName' | translate
+        }}</label>
+        <uiKit-input-text formControlName="organizationName"></uiKit-input-text>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="font-bold text-sm text-gray-700">{{
+          'profile.requestDate' | translate
+        }}</label>
+        <uiKit-input-text formControlName="requestDate"></uiKit-input-text>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="font-bold text-sm text-gray-700">{{
+          'profile.contactPhoneNumber' | translate
+        }}</label>
+        <uiKit-input-text formControlName="contactPhone"></uiKit-input-text>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="font-bold text-sm text-gray-700">{{
+          'profile.contactName' | translate
+        }}</label>
+        <uiKit-input-text formControlName="contactName"></uiKit-input-text>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="font-bold text-sm text-gray-700">{{
+          'profile.contactEmail' | translate
+        }}</label>
+        <uiKit-input-text formControlName="contactEmail"></uiKit-input-text>
+      </div>
+    </div>
+
+    <!-- Comparison Section -->
+    <div class="flex flex-col gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">{{ 'profile.oldInfo' | translate }}</label>
+          <uiKit-input-text formControlName="oldInfo1"></uiKit-input-text>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">{{ 'profile.newInfo' | translate }}</label>
+          <uiKit-input-text formControlName="newInfo1"></uiKit-input-text>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">{{ 'profile.oldInfo' | translate }}</label>
+          <uiKit-input-text formControlName="oldInfo2"></uiKit-input-text>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">{{ 'profile.newInfo' | translate }}</label>
+          <uiKit-input-text formControlName="newInfo2"></uiKit-input-text>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">{{ 'profile.oldInfo' | translate }}</label>
+          <uiKit-input-text formControlName="oldInfo3"></uiKit-input-text>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="font-bold text-sm text-gray-700">{{ 'profile.newInfo' | translate }}</label>
+          <uiKit-input-text formControlName="newInfo3"></uiKit-input-text>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reason Section -->
+    <div class="flex flex-col gap-2">
+      <label class="font-bold text-sm text-gray-700">{{ 'profile.reason' | translate }}</label>
+      <uikit-text-area
+        formControlName="reason"
+        [rows]="5"
+        [placeholder]="'profile.enterMessage' | translate"
+      >
+      </uikit-text-area>
+    </div>
+
+    <!-- Footer Action -->
+    <div class="flex justify-end pt-4 border-t border-gray-100">
+      <uikit-button
+        type="submit"
+        [label]="'common.save' | translate"
+        [style]="{ width: '120px', height: '40px', borderRadius: '12px', fontSize: '16px' }"
+      ></uikit-button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,73 @@
+<div class="row h-screen p-6!">
+  <div class="col-md-6 hidden md:block">
+    <div class="w-full h-full flex flex-col justify-center login gap-12 text-center rounded-[15px]">
+      <div>
+        <p class="lg:text-[40px]! md:text-[32px]! text-[28px]! font-bold! text-white">
+          {{ 'auth.welcomeToAdminManager' | translate }}
+        </p>
+        <p class="lg:text-[22px]! md:text-[18px]! text-[16px]! font-medium! text-white text-center">
+          {{ 'auth.yourGatewayToEffortlessManagement' | translate }}
+        </p>
+      </div>
+      <div class="w-full flex justify-center">
+        <img src="./assets/images/vertical-logo.svg" alt="" class="h-[190px]!" />
+      </div>
+      <div>
+        <p class="lg:text-[26px]! md:text-[22px]! text-[20px]! font-bold! text-white">
+          {{ 'auth.seamlessCollaboration' | translate }}
+        </p>
+        <p class="lg:text-[20px]! md:text-[18px]! text-[16px]! font-medium! text-white text-center">
+          {{ 'auth.effortlesslyWorkTogetherWithYourTeamInRealTime' | translate }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-12 pe-1!">
+    <form
+      [formGroup]="loginForm"
+      class="w-full h-full flex flex-col items-center justify-center gap-8 rounded-[15px]"
+    >
+      <p class="lg:text-[40px]! md:text-[32px]! text-[28px]! font-bold! text-(--primary-500)!">
+        {{ 'auth.loginToYourDashboard' | translate }}
+      </p>
+      <div class="control flex flex-col gap-1!">
+        <label for="email" class="text-start font-bold!">{{ 'auth.email' | translate }}</label>
+        <uiKit-input-text
+          formControlName="email"
+          [placeholder]="'auth.email' | translate"
+        ></uiKit-input-text>
+      </div>
+      <div class="control flex flex-col gap-1!">
+        <label for="password" class="text-start font-bold!">{{
+          'auth.password' | translate
+        }}</label>
+        <uikit-input-password
+          formControlName="password"
+          [placeholder]="'auth.passwordPlaceholder' | translate"
+        ></uikit-input-password>
+        <div class="flex justify-end">
+          <uikit-button
+            [plainText]="true"
+            [label]="'auth.forgotPassword' | translate"
+            class="text-end text-(--primary-500)! w-fit!"
+            (click)="goToForgotPassword()"
+          ></uikit-button>
+        </div>
+      </div>
+      <div class="control flex flex-col gap-1!">
+        <uikit-button
+          [label]="'auth.login' | translate"
+          [icon]="language() === 'ar' ? 'pi pi-arrow-left' : 'pi pi-arrow-right'"
+          [iconPosition]="language() === 'ar' ? 'left' : 'right'"
+          [style]="{
+            borderRadius: '16px',
+            width: '100%',
+            height: '56px',
+          }"
+          [disabled]="loginForm.invalid"
+          (click)="login()"
+        ></uikit-button>
+      </div>
+    </form>
+  </div>
+</div>

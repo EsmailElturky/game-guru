@@ -1,0 +1,10 @@
+.uiKit-text-area-counter {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.rtl {
+  .uiKit-text-area-counter {
+    flex-direction: row;
+  }
+}

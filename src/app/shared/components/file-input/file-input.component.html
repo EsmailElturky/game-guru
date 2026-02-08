@@ -1,0 +1,194 @@
+<div class="uikit-file-input">
+  <input
+    #fileInput
+    type="file"
+    [attr.id]="inputId()"
+    [attr.name]="inputName()"
+    [multiple]="multiple()"
+    [disabled]="readonly() || disabled()"
+    (change)="onFileSelected($event)"
+    class="hidden-input"
+    [attr.accept]="validation()?.allowedFileTypes?.join(',')"
+  />
+
+  <div
+    class="drop-zone"
+    [class.dragging]="isDraggingOver()"
+    [class.disabled]="readonly() || disabled()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <div class="drop-zone-content">
+      <div class="icon">
+        <i class="pi pi-cloud-upload"></i>
+      </div>
+      <p class="placeholder">{{ placeholder() }}</p>
+      <button
+        type="button"
+        pButton
+        label="Browse Files"
+        icon="pi pi-folder-open"
+        class="p-button-sm p-button-outlined"
+        (click)="triggerFileInput()"
+        [disabled]="readonly() || disabled()"
+      ></button>
+      <div class="validation-info">
+        @if(validation()?.maxFileSize){
+        <p class="placeholder">
+          Maximum Size: {{ validation()?.maxFileSize || 0 | fileSize }}
+        </p>
+        } @if(validation()?.maxFiles){
+        <p class="placeholder">
+          Maximum Files: {{ validation()?.maxFiles || 0 }}
+        </p>
+        } @if(validation()?.allowedExtensions){
+        <p class="placeholder">
+          Allowed Extensions: {{ validation()?.allowedExtensions?.join(", ") }}
+        </p>
+        } @if(validation()?.minImageWidth && validation()?.minImageHeight){
+        <p class="placeholder">
+          Minimum Dimension : {{ validation()?.minImageWidth || 0 }}x{{
+            validation()?.minImageHeight || 0
+          }}px
+        </p>
+        } @if(validation()?.maxImageWidth && validation()?.maxImageHeight){
+        <p class="placeholder">
+          Maximum Dimension : {{ validation()?.maxImageWidth || 0 }}x{{
+            validation()?.maxImageHeight || 0
+          }}px
+        </p>
+        } @if(validation()?.maxImageWidth){
+        <p class="placeholder">
+          Maximum Image Width: {{ validation()?.maxImageWidth || 0 }}px
+        </p>
+        } @if(validation()?.maxImageHeight){
+        <p class="placeholder">
+          Maximum Image Height: {{ validation()?.maxImageHeight || 0 }}px
+        </p>
+        }
+      </div>
+    </div>
+  </div>
+
+  @if(showFileList() && filePreviews().length > 0){
+  <div class="file-list">
+    <div class="file-list-header">
+      <h3>Selected Files ({{ filePreviews().length }})</h3>
+      @if(filePreviews().length > 0){
+      <button
+        type="button"
+        pButton
+        icon="pi pi-trash"
+        class="p-button-sm p-button-danger p-button-text"
+        (click)="clearAll()"
+        [disabled]="readonly() || isUploading()"
+        pTooltip="Clear all files"
+        tooltipPosition="top"
+      ></button>
+      }
+    </div>
+
+    <div class="file-items">
+      @for(preview of filePreviews(); let i = $index; track i) {
+      <div class="file-item">
+        @if(showPreview()) {
+        <div class="file-preview">
+          @if(preview.previewType === FilePreviewTypeEnum.IMAGE) {
+          <div class="image-preview">
+            <img [src]="preview.previewUrl" [alt]="preview.name" />
+          </div>
+          } @if(preview.previewType === FilePreviewTypeEnum.VIDEO) {
+          <div class="video-preview">
+            <video [src]="preview.previewUrl" controls></video>
+          </div>
+          } @if(preview.previewType === FilePreviewTypeEnum.AUDIO) {
+          <div class="audio-preview">
+            <audio [src]="preview.previewUrl" controls></audio>
+          </div>
+          } @if(preview.previewType === FilePreviewTypeEnum.DOCUMENT) {
+          <div class="document-preview">
+            <i class="pi pi-file"></i>
+          </div>
+          } @if(preview.previewType === FilePreviewTypeEnum.UNKNOWN) {
+          <div class="unknown-preview">
+            <i class="pi pi-file"></i>
+          </div>
+          }
+        </div>
+        }
+
+        <div class="file-info">
+          <div class="file-name" [title]="preview.name">{{ preview.name }}</div>
+          <div class="file-details">
+            <span class="file-size">{{ preview.size | fileSize }}</span>
+            @if(preview.dimensions){
+            <span class="file-dimensions">
+              {{ preview.dimensions.width }}x{{ preview.dimensions.height }}px
+            </span>
+            }
+          </div>
+
+          {{ preview.uploadStatus }}
+          @if(preview.uploadStatus === 'uploading') {
+          <div class="upload-progress">
+            <p-progressBar
+              [value]="preview.uploadProgress || 0"
+              [showValue]="true"
+            ></p-progressBar>
+          </div>
+          } @if(preview.uploadStatus){
+          <div class="upload-status">
+            @switch (preview.uploadStatus) { @case('success') {
+            <span class="status-badge success">
+              <i class="pi pi-check"></i> Uploaded
+            </span>
+            } @case('error') {
+            <span class="status-badge error">
+              <i class="pi pi-times"></i> {{ preview.errorMessage || "Failed" }}
+            </span>
+            } @case('pending') {
+            <span class="status-badge pending">
+              <i class="pi pi-clock"></i> Pending
+            </span>
+            }}
+          </div>
+          }
+        </div>
+
+        <div class="file-actions">
+          <button
+            type="button"
+            pButton
+            icon="pi pi-trash"
+            class="p-button-sm p-button-danger p-button-text"
+            (click)="removeFile(i)"
+            [disabled]="readonly() || preview.uploadStatus === 'uploading'"
+            pTooltip="Remove file"
+            tooltipPosition="left"
+          ></button>
+        </div>
+      </div>
+      }
+    </div>
+
+    @if(uploadUrl() && !autoUpload()){
+    <div class="upload-actions">
+      <button
+        type="button"
+        pButton
+        label="Upload Files"
+        icon="pi pi-upload"
+        (click)="uploadFiles()"
+        [loading]="isUploading()"
+        [disabled]="filePreviews().length === 0 || readonly()"
+      ></button>
+    </div>
+    }
+  </div>
+  } @if(showFileList() && filePreviews().length === 0){
+  <div class="empty-state">
+    <p>No files selected</p>
+  </div>
+  }
+</div>

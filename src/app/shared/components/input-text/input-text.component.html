@@ -1,0 +1,44 @@
+<div
+  class="fs-16 fw-medium uikit-input-text {{
+    isSearchable() || showClear() ? 'position-relative' : ''
+  }}"
+>
+  <input
+    type="text"
+    class="uikit-input"
+    pInputText
+    [(ngModel)]="value"
+    [id]="inputId()"
+    [name]="inputName()"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [readonly]="readonly()"
+    [hidden]="hidden()"
+    [attr.spellcheck]="allowSpellCheck()"
+    [attr.maxLength]="maxLength()"
+    [fluid]="!inline()"
+    [ngClass]="{
+      'inherit-style': style,
+      'no-border': withoutBorder(),
+      inline: inline(),
+    }"
+    [invalid]="(control?.errors && control?.touched) || hasError()"
+    [ngStyle]="style"
+    (keydown.space)="inline() ? $event.preventDefault() : $event"
+    (input)="emitInputTextValue($event.target.value)"
+    (paste)="allowPaste()"
+    (blur)="onBlur()"
+  />
+
+  @if (isSearchable() && !value() ) {
+  <span class="pi pi-search search-clear-icon"></span>
+  } @else if ((showClear()|| isSearchable()) && value() ) {
+  <span
+    class="pi pi-times search-clear-icon"
+    (click)="removeText()"
+    (keydown)="removeText()"
+  ></span>
+  } @if (control?.errors && control?.touched || hasError()) {
+  <uiKit-controls-error [error]="control?.errors"></uiKit-controls-error>
+  }
+</div>

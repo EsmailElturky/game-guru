@@ -1,0 +1,32 @@
+<div class="px-5 py-8 min-h-full flex flex-col">
+  <div class="text-[clamp(24px,5vw,32px)]! font-bold! px-8! py-6! text-gray-900">
+    <p>{{ 'navigation.profile' | translate }}</p>
+  </div>
+
+  <div class="flex-1 flex flex-col">
+    <p-tabs [value]="'0'" class="h-full flex-1 flex flex-col">
+      <p-tablist class="px-6 pt-2">
+        @for (tab of tabs(); track tab.value) {
+          <p-tab [value]="tab.value" class="text-base font-medium px-4 py-4">
+            {{ tab.label | translate }}
+          </p-tab>
+        }
+      </p-tablist>
+
+      <p-tabpanels class="flex-1 flex flex-col">
+        <p-tabpanel [value]="'0'" class="p-8 flex-1 flex flex-col">
+          <app-user-profile class="flex-1 flex flex-col"></app-user-profile>
+        </p-tabpanel>
+        <p-tabpanel [value]="'1'" class="p-8 flex-1 flex flex-col">
+          <app-change-password class="flex-1 flex flex-col"></app-change-password>
+        </p-tabpanel>
+        <p-tabpanel [value]="'2'" class="p-8 flex-1 flex flex-col">
+          <app-requests class="flex-1 flex flex-col"></app-requests>
+        </p-tabpanel>
+        <p-tabpanel [value]="'3'" class="p-8 flex-1 flex flex-col">
+          <app-notification class="flex-1 flex flex-col"></app-notification>
+        </p-tabpanel>
+      </p-tabpanels>
+    </p-tabs>
+  </div>
+</div>

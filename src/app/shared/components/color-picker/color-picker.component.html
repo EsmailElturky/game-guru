@@ -1,0 +1,22 @@
+<div class="uiKit-color-picker">
+  <p-colorpicker
+    [(ngModel)]="value"
+    [disabled]="disabled()"
+    [inputId]="inputId()"
+    [appendTo]="appendTo()"
+    [tabindex]="''"
+    (onChange)="onColorPickerChange()"
+  />
+  @if (viewHexText()) {
+  <uiKit-input-text
+    class="fs-16 fw-regular"
+    [(ngModel)]="hexValue"
+    [maxLength]="7"
+    inputId="colorPickerInputId"
+    (inputTextBlured)="onInputTextChanged($event)"
+  />
+  }
+</div>
+@if (control?.errors && control?.touched) {
+<uiKit-controls-error [error]="control?.errors"></uiKit-controls-error>
+}

@@ -1,0 +1,27 @@
+.uikit-input-text {
+  input {
+    &.no-border {
+      border: none !important;
+    }
+    &.inline {
+      border: none !important;
+      padding: 0;
+      background: transparent;
+      word-break: break-word;
+    }
+  }
+  // 👇 This will make the wrapper inline when its input has class "inline"
+  &:has(input.inline) {
+    display: inline;
+  }
+
+  &.position-relative {
+    position: relative;
+  }
+  .search-clear-icon {
+    position: absolute;
+    right: 3%;
+    bottom: 12px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,29 @@
+@if (error()?.[ControlError.Required]) {
+<div class="error-message">This field is required.</div>
+} @else if (error()?.[ControlError.Minlength]) {
+<div class="error-message">
+  Minimum length is {{ error()?.['minlength']?.requiredLength }} characters.
+</div>
+} @else if (error()?.[ControlError.Maxlength]) {
+<div class="error-message">
+  Maximum length is {{ error()?.['maxlength']?.requiredLength }} characters.
+</div>
+} @else if (error()?.[ControlError.Pattern]) {
+<div class="error-message">Invalid format.</div>
+} @else if (error()?.[ControlError.Email]) {
+<div class="error-message">Please enter a valid email address.</div>
+} @else if (error()?.[ControlError.Min]) {
+<div class="error-message">
+  Value must be at least {{ error()?.['min']?.min }}.
+</div>
+} @else if (error()?.[ControlError.Max]) {
+<div class="error-message">
+  Value must be less than or equal to {{ error()?.['max']?.max }}.
+</div>
+} @else if (error()?.[ControlError.RequiredTrue]) {
+  <div class="error-message">This field must be checked.</div>
+} @else if (error()?.[ControlError.Custom]) {
+<div class="error-message">{{ error()?.['custom'] }}</div>
+} @else {
+<div class="error-message">This field is invalid.</div>
+}

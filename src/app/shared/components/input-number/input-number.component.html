@@ -1,0 +1,32 @@
+<div class="fs-16 fw-medium uikit-input-number">
+  <p-inputnumber
+    [(ngModel)]="value"
+    uikitArabicToEnglish
+    [inputId]="inputId()"
+    [placeholder]="placeholder()"
+    [name]="inputName()"
+    [disabled]="disabled()"
+    [readonly]="readonly()"
+    [currency]="currency()"
+    [mode]="currency() ? 'currency' : 'decimal'"
+    [fluid]="true"
+    [inputStyle]="style()"
+    [minFractionDigits]="minFractionDigits()"
+    [maxFractionDigits]="maxFractionDigits()"
+    [useGrouping]="useGrouping()"
+    [invalid]="(control?.errors && control?.touched) || hasError()"
+    [min]="min()"
+    [max]="max()"
+    [maxlength]="maxlength()"
+    [prefix]="prefix()"
+    [suffix]="suffix()"
+    [showButtons]="showButtons()"
+    [step]="step()"
+    [showClear]="showClear()"
+    (onInput)="onInputChange()"
+    (onBlur)="onBlur()"
+  ></p-inputnumber>
+  @if (control?.errors && control?.touched || hasError()) {
+  <uiKit-controls-error [error]="control?.errors"></uiKit-controls-error>
+  }
+</div>

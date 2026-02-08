@@ -1,0 +1,29 @@
+<div class="uiKit-text-area">
+  <textarea
+    pTextarea
+    class="uiKit-text-area-input"
+    [(ngModel)]="value"
+    [disabled]="disabled()"
+    [invalid]="(control?.errors && control?.touched) || hasError()"
+    fluid
+    [id]="id()"
+    [name]="name()"
+    [placeholder]="placeholder()"
+    [autocomplete]="autocomplete() ? 'on' : 'new-password'"
+    [readonly]="readonly()"
+    [spellcheck]="allowSpellCheck()"
+    [maxLength]="maxLength()"
+    [rows]="rows()"
+    (input)="emitInputTextValue($event)"
+    (blur)="onBlur()"
+    [style]="style()"
+    (paste)="allowPaste()"
+  ></textarea>
+  @if (isShowCounter() && maxLength()) {
+  <div class="uiKit-text-area-counter">
+    {{ value()?.length }} / {{ maxLength() }}
+  </div>
+  } @if (control?.errors && control?.touched || hasError()) {
+  <uiKit-controls-error [error]="control?.errors"></uiKit-controls-error>
+  }
+</div>

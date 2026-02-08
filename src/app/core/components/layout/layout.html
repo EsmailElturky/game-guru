@@ -1,0 +1,31 @@
+<div class="flex p-0 m-0 w-full h-screen overflow-hidden">
+  <!-- Sidebar 300px on md and 16px on sm -->
+  <div class="overflow-y-auto overflow-x-hidden h-full md:w-[300px] w-0">
+    <app-side-bar
+      [visible]="isSidebarVisible()"
+      (toggleSidebar)="isSidebarVisible.set($event)"
+      [position]="isEnglish()! ? 'left' : 'right'"
+    ></app-side-bar>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex flex-col overflow-hidden h-full flex-1">
+    <!-- Navigation Bar -->
+    <div class="w-full h-23 flex items-center justify-start">
+      <button
+        class="md:hidden! mx-2!"
+        pButton
+        [icon]="isEnglish()! ? 'pi pi-angle-right' : 'pi pi-angle-left'"
+        (click)="toggleSidebar()"
+      ></button>
+      <app-nav-bar></app-nav-bar>
+    </div>
+
+    <!-- Router Outlet -->
+    <div class="w-full flex-1 overflow-y-auto overflow-x-hidden bg-(--guru-surface-500) p-4!">
+      <div class="bg-(--guru-surface-0) h-full">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
